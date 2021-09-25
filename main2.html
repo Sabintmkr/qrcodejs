@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chong Co QR Generator</title>
+    <style>
+        #header {
+
+            font-family: sans-serif;
+            font-weight: 900;
+            font-size: x-large;
+            margin-bottom: 20px;
+            color: #f13e16;
+
+        }
+
+        #foot{
+
+            font-family: sans-serif;
+            font-weight: 900;
+            font-size: x-large;
+            color: #f13e16;
+            margin-bottom: 20px;
+            margin-left: 45px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        Chong Co GreenWay
+    </div>
+
+    <div id="container">
+
+    </div>
+
+    <div id="foot">
+        In~House Special 
+    </div>
+</body>
+
+</html>
+<script src="jquery-3.3.1.min.js"></script>
+<script src="easy.qrcode.min.js"></script>
+<script type="text/template" id="qrcodeTpl">
+    <div class="imgblock">
+        <!--div class="title">{title}</div-->
+        <div class="qr" id="qrcode_{i}"></div>
+    </div>
+</script>
+<script type="text/javascript">
+    var demoParams = [
+
+        {
+            title: "Chong Co Menu",
+            config: {
+                text: "http://chongcothai.com.au/images/special_greenway.pdf", // Content
+
+                width: 300, // Widht
+                height: 300, // Height
+                colorDark: "#000000", // Dark color
+                colorLight: "#ffffff", // Light color
+
+                //quietZone: 15,
+                //quietZoneColor: '#00CED1',
+
+                // === Logo
+                logo: "logo.png", // LOGO
+
+                //					logo:"http://127.0.0.1:8020/easy-qrcodejs/demo/logo.png",  
+                logoWidth: 120,
+                logoHeight: 120,
+                logoBackgroundColor: '#ffffff', // Logo backgroud color, Invalid when `logBgTransparent` is true; default is '#ffffff'
+                logoBackgroundTransparent: false, // Whether use transparent image, default is false
+
+
+                correctLevel: QRCode.CorrectLevel.H // L, M, Q, H
+
+            }
+
+        }
+
+
+    ]
+
+
+
+    var qrcodeTpl = document.getElementById("qrcodeTpl").innerHTML;
+    var container = document.getElementById('container');
+
+    for (var i = 0; i < demoParams.length; i++) {
+        var qrcodeHTML = qrcodeTpl.replace(/\{title\}/, demoParams[i].title).replace(/{i}/, i);
+        container.innerHTML += qrcodeHTML;
+    }
+    for (var i = 0; i < demoParams.length; i++) {
+        var t = new QRCode(document.getElementById("qrcode_" + i), demoParams[i].config);
+    }
+</script>
